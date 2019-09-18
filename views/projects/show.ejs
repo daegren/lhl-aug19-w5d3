@@ -10,5 +10,15 @@
     <h1><%= project.name %></h1>
 
     <a href="/projects">Back</a>
+
+    <h2>Tasks</h2>
+    <ul>
+      <% tasks.forEach(task => { %>
+      <li>
+        <input type="checkbox" <%= task.completed ? "checked" : "" %> /> <%=
+        task.title %>
+      </li>
+      <% }); %>
+    </ul>
   </body>
 </html>

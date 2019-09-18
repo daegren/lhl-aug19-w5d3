@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // MODELS
 
 const projects = require("./models/project")(db);
+const tasks = require("./models/task")(db);
 
 // ROUTES
 
@@ -57,10 +58,12 @@ app.post("/projects", (req, res) => {
 });
 
 app.get("/projects/:id", (req, res) => {
-  projects
-    .find(req.params.id)
-    .then(project => {
-      res.render("projects/show", { project });
+  Promise.all([
+    projects.find(req.params.id),
+    tasks.findByProject(req.params.id)
+  ])
+    .then(([project, tasks]) => {
+      res.render("projects/show", { project, tasks });
     })
     .catch(err => {
       res.status(500).send(err.message);
