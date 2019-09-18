@@ -26,8 +26,21 @@ module.exports = db => {
         .catch(err => reject(err));
     });
 
+  const create = name =>
+    new Promise((resolve, reject) => {
+      const query = "INSERT INTO projects (name) VALUES ($1) RETURNING *;";
+      const values = [name];
+
+      db.query(query, values)
+        .then(({ rows }) => {
+          resolve(rows[0]);
+        })
+        .catch(err => reject(err));
+    });
+
   return {
     all,
-    find
+    find,
+    create
   };
 };

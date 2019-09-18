@@ -34,6 +34,28 @@ app.get("/projects", (req, res) => {
     });
 });
 
+app.get("/projects/new", (req, res) => {
+  res.render("projects/new");
+});
+
+app.post("/projects", (req, res) => {
+  const { name } = req.body;
+
+  if (!name) {
+    res.redirect("/projects/new");
+    return;
+  }
+
+  projects
+    .create(name)
+    .then(project => {
+      res.redirect(`/projects/${project.id}`);
+    })
+    .catch(err => {
+      res.status(500).send(err.message);
+    });
+});
+
 app.get("/projects/:id", (req, res) => {
   projects
     .find(req.params.id)

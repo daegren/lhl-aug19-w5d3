@@ -7,14 +7,13 @@
     <title>Tasker</title>
   </head>
   <body>
-    <h1>Projects</h1>
+    <h1>New Project</h1>
 
-    <a href="/projects/new">New Project</a>
+    <form action="/projects" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" />
 
-    <ul>
-      <% projects.forEach(project => { %>
-      <li><a href="/projects/<%= project.id %>"><%= project.name %></a></li>
-      <% }); %>
-    </ul>
+      <input type="submit" value="Create Project" />
+    </form>
   </body>
 </html>
