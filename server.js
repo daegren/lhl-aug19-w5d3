@@ -34,6 +34,17 @@ app.get("/projects", (req, res) => {
     });
 });
 
+app.get("/projects/:id", (req, res) => {
+  projects
+    .find(req.params.id)
+    .then(project => {
+      res.render("projects/show", { project });
+    })
+    .catch(err => {
+      res.status(500).send(err.message);
+    });
+});
+
 app.listen(PORT, () => {
   console.log(`Application is running at http://localhost:${PORT}`);
 });

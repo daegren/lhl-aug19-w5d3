@@ -7,12 +7,8 @@
     <title>Tasker</title>
   </head>
   <body>
-    <h1>Projects</h1>
+    <h1><%= project.name %></h1>
 
-    <ul>
-      <% projects.forEach(project => { %>
-      <li><a href="/projects/<%= project.id %>"><%= project.name %></a></li>
-      <% }); %>
-    </ul>
+    <a href="/projects">Back</a>
   </body>
 </html>
